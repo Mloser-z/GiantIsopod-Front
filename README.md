@@ -1,0 +1,2 @@
+# GiantIsopod_Front
+大学三年级第三学期小组实训项目的前端。项目包括Vue源码以及docker部署相关文件。
