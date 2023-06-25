@@ -1,5 +1,5 @@
 <template>
-    <HomeVue />
+  <HomeVue />
 </template>
 
 <script>
@@ -14,11 +14,16 @@ import HomeVue from '@/views/Home.vue'
 
 <style>
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("assets/bg1.jpg");
+  background-repeat: no-repeat;
+  background-size:100%;
+}
+body{
+  margin: 0; /* 外边距 */
+  padding: 0; /* 内边距 */
+  border: 0; /* 边框 */
 }
 </style>

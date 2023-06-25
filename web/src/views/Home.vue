@@ -1,5 +1,6 @@
 <template>
-    <InitVue />
+  <Header/>
+  <MainPage />
 </template>
 
 <script>
@@ -9,7 +10,8 @@ export default {
 </script>
 
 <script setup>
-import InitVue from '@/components/Init.vue';
+import Header from "@/components/Header";
+import MainPage from '@/components/mainPage.vue';
 </script>
 
 <style></style>
