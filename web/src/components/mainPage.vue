@@ -18,9 +18,15 @@
     <!--      <input type="file" name="pic" id="pic" v-on:input="showImg" accept="image/gif, image/jpeg" style="display: none">-->
     <!--    </div>-->
     <!--  </div>-->
+
+    <!--TODO: 调整样式-->
+    <div style="margin: 40px auto;text-align: center;">
+        <image-card :images="images"></image-card>
+    </div>
 </template>
 
 <script>
+// TODO: 改用set-up语法糖，当前文件修改到views目录下
 export default {
     name: 'MainPage',
     methods: {
@@ -37,6 +43,10 @@ export default {
 </script>
 
 <script setup>
+import { ref } from 'vue';
+import ImageCard from './ImageCard.vue';
+
+const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg'])
 </script>
 
 <style scoped>

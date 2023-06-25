@@ -1,8 +1,8 @@
 <template>
     <a-carousel :autoPlay="{ interval: 3000, hoverToPause: true }" animation-name="card" show-arrow="never"
-        indicator-position="outer" :style="{ width: '100%', height: '240px', }">
+        indicator-position="bottom" :style="{ width: '100%', height: '340px', }">
         <a-carousel-item v-for="image in props.images" :key="image" :style="{ width: '60%' }">
-            <img :src="image" :style="{ width: '100%', }" />
+            <img :src="image" :style="{ height: '100%', }" />
         </a-carousel-item>
     </a-carousel>
 </template>
