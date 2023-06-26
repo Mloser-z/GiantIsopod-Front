@@ -1,7 +1,8 @@
 <template>
     <div style="margin: 10px auto;text-align: center">
-        <a-input-search style="margin-left: 24vw;" :style="{ width: '750px' }" size="large" placeholder="搜索图片"
-            search-button />
+        <a-input-search style="margin-left: 28vw;float: left;margin-right: 25px;"
+                        :style="{ width: '700px' }" size="large"
+                        placeholder="搜索图片" search-button />
         <div class="upload-container">
             <img src="../assets/camera.png" style="float: left;height: 65px;">
             <label for="pic">上传图片</label>
@@ -20,7 +21,7 @@
     <!--  </div>-->
 
     <!--TODO: 调整样式-->
-    <div style="margin: 40px auto;text-align: center;">
+    <div style="margin: 120px auto;text-align: center;">
         <image-card :images="images"></image-card>
     </div>
 </template>
@@ -29,16 +30,16 @@
 // TODO: 改用set-up语法糖，当前文件修改到views目录下
 export default {
     name: 'MainPage',
-    methods: {
-        showImg() {
-            // //获取上传文件的信息
-            // var upfile = document.getElementById('pic').files[0];
-            // //生成文件url
-            // var sr = window.URL.createObjectURL(upfile);
-            // var goodsimg = document.getElementById('plantImg');
-            // goodsimg.src = sr;
-        },
-    }
+    // methods: {
+    //     showImg() {
+    //         //获取上传文件的信息
+    //         var upfile = document.getElementById('pic').files[0];
+    //         //生成文件url
+    //         var sr = window.URL.createObjectURL(upfile);
+    //         var goodsimg = document.getElementById('plantImg');
+    //         goodsimg.src = sr;
+    //     },
+    // }
 }
 </script>
 
@@ -47,14 +48,19 @@ import { ref } from 'vue';
 import ImageCard from './ImageCard.vue';
 
 const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg'])
+
+const showImg = () => {
+
+}
 </script>
 
 <style scoped>
 .upload-container {
     text-align: center;
-    float: right;
-    background: rgba(0, 0, 0, 0.8);
+    float: left;
+    background: rgba(7,54,36,0.9);
     border-radius: 6px;
+    padding: 0 10px;
 }
 
 .upload-container label {
@@ -75,5 +81,18 @@ const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg'])
 .arco-btn-size-large.arco-btn-only-icon {
     width: 60px !important;
     height: 60px !important;
+}
+
+.arco-btn-primary, .arco-btn-primary[type='button'], .arco-btn-primary[type='submit'] {
+  background-color: green !important;
+  margin-right: 1.5px;
+}
+
+.arco-carousel-card .arco-carousel-item-prev {
+  opacity: 1 !important;
+}
+
+.arco-carousel-card .arco-carousel-item-next {
+  opacity: 1 !important;
 }
 </style>

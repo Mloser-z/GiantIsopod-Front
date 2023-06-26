@@ -1,7 +1,7 @@
 <template>
 <div style="width: 100vw;height: 12vh;background-color: rgba(3,3,41,0.5);display: block;">
   <img src="../assets/logo.png" id="logo">
-  <img src="../assets/back_btn.png" id="back_btn">
+<!--  <img src="../assets/back_btn.png" id="back_btn">-->
 </div>
 </template>
 

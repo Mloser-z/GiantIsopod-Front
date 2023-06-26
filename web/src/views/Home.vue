@@ -11,7 +11,7 @@ export default {
 
 <script setup>
 import Header from "@/components/Header";
-import MainPage from '@/components/mainPage.vue';
+import MainPage from '@/components/MainPage.vue';
 </script>
 
 <style></style>
