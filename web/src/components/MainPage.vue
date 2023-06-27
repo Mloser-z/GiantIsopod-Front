@@ -22,8 +22,10 @@
 
     <!--TODO: 调整样式-->
     <div style="margin: 120px auto;text-align: center;">
-        <image-card :images="images"></image-card>
+        <image-card :images="images" v-if="displayType==1"></image-card>
+        <info-card  v-if="displayType==2"></info-card>
     </div>
+
 </template>
 
 <script>
@@ -46,8 +48,10 @@ export default {
 <script setup>
 import { ref } from 'vue';
 import ImageCard from './ImageCard.vue';
+import InfoCard from './InfoCard.vue';
 
 const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg'])
+const displayType = ref(2)
 
 const showImg = () => {
 
