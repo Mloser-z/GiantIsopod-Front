@@ -19,7 +19,7 @@ import Cards from "@/components/Cards";
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../assets/bg3.jpg");
+  background-image: url("../assets/bg4.jpg");
   /*linear-gradient(*/
   /*rgba(0, 0, 0, 0.9),*/
   /*rgba(0, 0, 0, 0.9) 60%,*/

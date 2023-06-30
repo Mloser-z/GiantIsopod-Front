@@ -22,7 +22,7 @@ import MainPage from '@/components/MainPage.vue';
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../assets/bg1.jpg");
+  background-image: url("../assets/bg2.jpg");
   /*linear-gradient(*/
   /*rgba(0, 0, 0, 0.9),*/
   /*rgba(0, 0, 0, 0.9) 60%,*/
