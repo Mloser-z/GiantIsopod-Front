@@ -2,7 +2,8 @@
     <div style="margin: 10px auto;text-align: center">
         <a-input-search style="margin-left: 28vw;float: left;margin-right: 25px;"
                         :style="{ width: '700px' }" size="large"
-                        placeholder="搜索图片" search-button />
+                        placeholder="搜索图片" search-button
+                        v-on:search="search_by_keywords" v-model="key_words"/>
         <div class="upload-container">
             <img src="../assets/camera.png" style="float: left;height: 65px;">
             <label for="pic">上传图片</label>
@@ -49,12 +50,26 @@ export default {
 import { ref } from 'vue';
 import ImageCard from './ImageCard.vue';
 import InfoCard from './InfoCard.vue';
+import { getLabelFromText , postImage} from "@/apis";
 
 const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg'])
-const displayType = ref(2)
+const displayType = ref(1)
+const key_words = ref(' ')
 
 const showImg = () => {
+  postImage('/image/search', document.getElementById('pic').files[0]).then((value) => {
+    console.log(value)
+  })
+  displayType.value = 2;
+}
 
+const search_by_keywords = () =>{
+  console.log(key_words)
+  getLabelFromText('/image/search',key_words).then((value) => {
+    console.log(value)
+  })
+
+  displayType.value = 2;
 }
 </script>
 
