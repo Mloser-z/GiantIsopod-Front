@@ -1,14 +1,11 @@
 <template>
     <div style="margin: 10px auto;text-align: center">
-        <a-input-search style="margin-left: 28vw;float: left;margin-right: 25px;"
-                        :style="{ width: '700px' }" size="large"
-                        placeholder="搜索图片" search-button
-                        v-on:search="search_by_keywords" v-model="key_words"/>
+        <a-input-search style="margin-left: 28vw;float: left;margin-right: 25px;" :style="{ width: '700px' }" size="large"
+            placeholder="搜索图片" search-button v-on:search="search_by_keywords" v-model="key_words" />
         <div class="upload-container">
             <img src="../assets/camera.png" style="float: left;height: 65px;">
             <label for="pic">上传图片</label>
-            <input type="file" name="pic" id="pic" v-on:input="showImg" accept="image/gif, image/jpeg"
-                style="display: none">
+            <input type="file" name="pic" id="pic" v-on:input="showImg" accept="image/png, image/jpg" style="display: none">
         </div>
     </div>
     <!--  <div style="margin: 14vh 10vw;width: 40vw;height: 45vh;">-->
@@ -23,10 +20,9 @@
 
     <!--TODO: 调整样式-->
     <div style="margin: 120px auto;text-align: center;">
-        <image-card :images="images" v-if="displayType==1"></image-card>
-        <info-card  v-if="displayType==2"></info-card>
+        <image-card :images="images" v-if="displayType == 1"></image-card>
+        <info-card v-if="displayType == 2"></info-card>
     </div>
-
 </template>
 
 <script>
@@ -50,26 +46,26 @@ export default {
 import { ref } from 'vue';
 import ImageCard from './ImageCard.vue';
 import InfoCard from './InfoCard.vue';
-import { getLabelFromText , postImage} from "@/apis";
+import { getLabelFromText, postImage } from "@/apis";
 
 const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg'])
 const displayType = ref(1)
-const key_words = ref(' ')
+const key_words = ref('')
 
 const showImg = () => {
-  postImage('/image/search', document.getElementById('pic').files[0]).then((value) => {
-    console.log(value)
-  })
-  displayType.value = 2;
+    postImage('api/image/search', document.getElementById('pic').files[0]).then((value) => {
+        console.log(value)
+    })
+    displayType.value = 2;
 }
 
-const search_by_keywords = () =>{
-  console.log(key_words)
-  getLabelFromText('/image/search',key_words).then((value) => {
-    console.log(value)
-  })
+const search_by_keywords = () => {
+    console.log(key_words)
+    getLabelFromText('api/image/search', key_words.value).then((value) => {
+        console.log(value)
+    })
 
-  displayType.value = 2;
+    displayType.value = 2;
 }
 </script>
 
@@ -77,7 +73,7 @@ const search_by_keywords = () =>{
 .upload-container {
     text-align: center;
     float: left;
-    background: rgba(7,54,36,0.9);
+    background: rgba(7, 54, 36, 0.9);
     border-radius: 6px;
     padding: 0 10px;
 }
@@ -102,16 +98,18 @@ const search_by_keywords = () =>{
     height: 60px !important;
 }
 
-.arco-btn-primary, .arco-btn-primary[type='button'], .arco-btn-primary[type='submit'] {
-  background-color: green !important;
-  margin-right: 1.5px;
+.arco-btn-primary,
+.arco-btn-primary[type='button'],
+.arco-btn-primary[type='submit'] {
+    background-color: green !important;
+    margin-right: 1.5px;
 }
 
 .arco-carousel-card .arco-carousel-item-prev {
-  opacity: 1 !important;
+    opacity: 1 !important;
 }
 
 .arco-carousel-card .arco-carousel-item-next {
-  opacity: 1 !important;
+    opacity: 1 !important;
 }
 </style>
