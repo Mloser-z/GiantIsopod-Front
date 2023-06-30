@@ -1,28 +1,25 @@
-<template >
-  <div id="home">
-    <Header/>
-    <MainPage />
-  </div>
-
+<template>
+<div id="plantsCard">
+  <Header/>
+  <Cards/>
+</div>
 </template>
 
 <script>
 export default {
-    name: 'HomeVue',
+  name: "PlantCard"
 }
 </script>
-
 <script setup>
 import Header from "@/components/Header";
-import MainPage from '@/components/MainPage.vue';
+import Cards from "@/components/Cards";
 </script>
-
-<style>
-#home{
+<style scoped>
+#plantsCard{
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../assets/bg2.jpg");
+  background-image: url("../assets/bg4.jpg");
   /*linear-gradient(*/
   /*rgba(0, 0, 0, 0.9),*/
   /*rgba(0, 0, 0, 0.9) 60%,*/
