@@ -21,6 +21,7 @@
     <div style="margin: 120px auto;text-align: center;">
         <image-card :images="images" v-if="displayType == 1"></image-card>
         <info-card v-if="displayType == 2"></info-card>
+        <predict-card v-if="displayType == 3" @transfer="search"></predict-card>
     </div>
 </template>
 
@@ -44,10 +45,11 @@ export default {
 import { ref } from 'vue';
 import ImageCard from './ImageCard.vue';
 import InfoCard from './InfoCard.vue';
+import PredictCard from './PredictCard';
 import { getLabelFromText, postImage } from "@/apis";
 
 const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg'])
-const displayType = ref(1)
+const displayType = ref(3)
 const key_words = ref('')
 
 const showImg = () => {
@@ -63,7 +65,13 @@ const search_by_keywords = () => {
         console.log(value)
     })
 
-    displayType.value = 2;
+    displayType.value = 3;
+}
+
+const search = (plantName) => {
+  // 根据子组件传回植物名字搜索
+  displayType.value = 2;
+  console.log(plantName);
 }
 </script>
 
