@@ -18,7 +18,6 @@
     <!--    </div>-->
     <!--  </div>-->
 
-    <!--TODO: 调整样式-->
     <div style="margin: 120px auto;text-align: center;">
         <image-card :images="images" v-if="displayType == 1"></image-card>
         <info-card v-if="displayType == 2"></info-card>
@@ -26,7 +25,6 @@
 </template>
 
 <script>
-// TODO: 改用set-up语法糖，当前文件修改到views目录下
 export default {
     name: 'MainPage',
     // methods: {
