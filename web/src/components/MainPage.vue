@@ -19,9 +19,10 @@
     <!--  </div>-->
 
     <div style="margin: 120px auto;text-align: center;">
-        <image-card :images="images" v-if="displayType == 1"></image-card>
-        <info-card v-if="displayType == 2"></info-card>
-        <predict-card v-if="displayType == 3" @transfer="search"></predict-card>
+      <LoadView v-if="displayType == 0"></LoadView>
+      <image-card :images="images" v-if="displayType == 1" @postSearchRequest="search_from_imgCard"></image-card>
+      <info-card v-if="displayType == 2"></info-card>
+      <predict-card v-if="displayType == 3" @transfer="search"></predict-card>
     </div>
 </template>
 
@@ -46,34 +47,61 @@ import { ref } from 'vue';
 import ImageCard from './ImageCard.vue';
 import InfoCard from './InfoCard.vue';
 import PredictCard from './PredictCard';
+import LoadView from './LoadView';
 import { getLabelFromText, postImage } from "@/apis";
 
-const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg'])
-const displayType = ref(3)
+// 轮播图url数组
+const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg','flowers4.jpg','flowers5.jpg','flowers6.jpg'])
+// 根据变量展示界面，0为加载中，1为初始界面，2为单个植物具体信息界面，3为预测结果界面（多种可能展示）
+const displayType = ref(1)
+// 存储待搜索关键词的变量
 const key_words = ref('')
 
+// 上传图片，预测返回多个结果
 const showImg = () => {
+    displayType.value = 0;
     postImage('api/image/search', document.getElementById('pic').files[0]).then((value) => {
-        console.log(value)
-    })
-    displayType.value = 2;
-}
+      if(value.status == 200){
+        displayType.value = 2;
+      }
 
+    })
+
+}
+//关键词，识别结果
 const search_by_keywords = () => {
-    console.log(key_words)
-    getLabelFromText('api/image/search', key_words.value).then((value) => {
-        console.log(value)
-    })
-
-    displayType.value = 3;
+  displayType.value = 0;
+  getLabelFromText('api/image/search', key_words.value).then((value) => {
+    console.log(value);
+    if(key_words.value == ''){
+      displayType.value = 1;
+    }else {
+      displayType.value = 3;
+    }
+  })
 }
-
+//根据植物名搜索唯一结果
 const search = (plantName) => {
   // 根据子组件传回植物名字搜索
-  displayType.value = 2;
+  displayType.value = 0;
   console.log(plantName);
+  getLabelFromText('api/image/search', plantName).then((value) => {
+    console.log(value);
+    if(key_words.value == ''){
+      displayType.value = 1;
+    }else {
+      displayType.value = 3;
+    }
+  })
 }
-</script>
+//主页轮播图，搜索结果
+const search_from_imgCard = (imgUrl) =>
+{
+  postImage('api/image/search', new File([imgUrl],'plant')).then((value) => {
+    console.log(value)
+  })
+  displayType.value = 2;
+}</script>
 
 <style scoped>
 .upload-container {

@@ -2,6 +2,7 @@
     <div id="plantsCard">
         <Header />
         <Cards v-if="load" :plants="plants" />
+        <InfoCard v-else></InfoCard>
     </div>
 </template>
 
@@ -13,11 +14,12 @@ export default {
 <script setup>
 import Header from "@/components/Header";
 import Cards from "@/components/Cards";
+import InfoCard from "@/components/InfoCard";
 import { getLabels } from "@/apis";
 
 import { ref } from "vue";
 
-let load = ref(false)
+let load = ref(true)
 let plants = ref()
 
 getLabels("api/image/label").then((response) => {
