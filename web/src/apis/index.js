@@ -4,10 +4,8 @@ export function getLabels(url) {
     return http.get(url);
 }
 
-export function postLabel(url, label) {
-    let headers = { "Content-Type": "application/json" }
-    let data = { "label": label }
-    return http.post(url, headers, data);
+export function getLabel(url, label) {
+    return http.get(url+'/'+label)
 }
 
 export function getLabelFromText(url, query) {

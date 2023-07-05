@@ -4,7 +4,7 @@
         <div id="cards_box">
             <view v-for="plant in props.plants" :key="plant.name_zh">
                 <div style="float: left; width: 20%; overflow: hidden">
-                    <img :src="plant.url" :id="plant.id" class="card_img" @click="look_up_flower(plant.name_zh)" />
+                    <img :src="plant.url" :id="plant.id" class="card_img" @click="look_up_flower(plant.id)" />
                     <p class="plant_name">{{ plant.name_zh }}</p>
                 </div>
             </view>
@@ -18,10 +18,14 @@ export default {
 };
 </script>
 <script setup>
-import { defineProps } from "vue";
+import { defineProps ,defineEmits } from "vue";
+const emits = defineEmits(['postSearchRequest']);
 
 const props = defineProps({ plants: Array })
-const look_up_flower = (flower_name) => { };
+const look_up_flower = (plantId) => {
+  emits('postSearchRequest',plantId)
+
+};
 </script>
 <style scoped>
 /*只在 webkit 核心的浏览器中有效，例如 Chrome、新 Edge、Safari 等*/
