@@ -6,23 +6,23 @@
     position: relative;
     top: 90px;
     margin-top: -2vh;
-    left: -35vw;"> {{ props.plants.flower_name }}</p>
+    left: -35vw;"> {{ props.plant.flower_name }}</p>
 
         <p style="
     font-size: 2.5vh;
     color: darkgreen;
     position: relative;
     top: 35px;
-    left: -35vw;">{{ props.plants.flower_type }}</p>
+    left: -35vw;">{{ props.plant.flower_type }}</p>
 
         <div style="
     display: block;
     position: relative;
     top: 60px;
     left: -10vw;">
-            <img :src="props.plants.pics[0]" class="flower_img">
-            <img :src="props.plants.pics[1]" class="flower_img">
-            <img :src="props.plants.pics[2]" class="flower_img">
+            <img :src="props.plant.pics[0]" class="flower_img">
+            <img :src="props.plant.pics[1]" class="flower_img">
+            <img :src="props.plant.pics[2]" class="flower_img">
         </div>
         <div style="
     height: 100vh;
@@ -32,7 +32,7 @@
     padding: 5vh 6vw;
     font-size: 2.5vh;
     line-height: 1.4;">
-            {{ props.plants.flower_intro }}
+            {{ props.plant.flower_intro }}
         </div>
     </div>
 </template>
@@ -43,8 +43,8 @@ export default {
 }
 </script>
 <script setup>
-import {defineProps} from 'vue';
-const props = defineProps({ plant:{flower_name:String, flower_type:String,flower_intro:String,pics:Array } });
+import { defineProps } from 'vue';
+const props = defineProps({ plant: Object });
 
 </script>
 <style scoped>
