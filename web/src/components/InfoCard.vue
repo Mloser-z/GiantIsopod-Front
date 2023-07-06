@@ -30,7 +30,6 @@ export default {
 <script setup>
 import { defineProps } from 'vue';
 const props = defineProps({ plant: Object });
-
 </script>
 <style scoped>
 .flower_img {
