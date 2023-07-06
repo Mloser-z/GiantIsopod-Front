@@ -21,7 +21,7 @@
     <div style="margin: 120px auto;text-align: center;">
       <LoadView v-if="displayType == 0"></LoadView>
       <image-card :images="images" v-if="displayType == 1" @postSearchRequest="search_from_imgCard"></image-card>
-      <info-card v-if="displayType == 2"></info-card>
+      <info-card v-if="displayType == 2" :plant="plant_result"></info-card>
       <predict-card v-if="displayType == 3" @transfer="search"></predict-card>
     </div>
 </template>
@@ -56,6 +56,8 @@ const images = ref(['flowers1.jpg', 'flowers2.jpg', 'flowers3.jpg','flowers4.jpg
 const displayType = ref(1)
 // 存储待搜索关键词的变量
 const key_words = ref('')
+// 存储搜索结果
+const plant_result = ref({ flower_name: '大王花对对对', flower_type: '霸王拿书', flower_intro: '1111', pics: ['flowers1.jpg','flowers1.jpg','flowers1.jpg'] })
 
 // 上传图片，预测返回多个结果
 const showImg = () => {

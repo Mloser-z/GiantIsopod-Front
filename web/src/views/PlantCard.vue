@@ -1,9 +1,12 @@
 <template>
-    <div id="plantsCard">
-        <Header />
-        <Cards v-if="load" :plants="plants" @postSearchRequest="look_up_a_plant" />
-        <InfoCard :plant="plant" v-else></InfoCard>
+  <div id="plantsCard">
+    <Header />
+    <Cards v-if="load" :plants="plants" @postSearchRequest="look_up_a_plant" />
+    <div style="margin: 120px auto;text-align: center;">
+      <InfoCard :plant="plant"  v-if=" !load"></InfoCard>
     </div>
+  </div>
+
 </template>
 
 <script>
@@ -19,10 +22,10 @@ import { getLabels, getLabel } from "@/apis";
 
 import { ref } from "vue";
 
-let load = ref(true)
+let load = ref(false)
 let plants = ref()
 let plant = ref(new Object())
-//let plant = ref({ flower_name: '', flower_type: '', flower_intro: '', pics: [] })
+// let test_plant = ref({ flower_name: '大王花对对对', flower_type: '霸王拿书', flower_intro: '1111', pics: ['flowers1.jpg','flowers1.jpg','flowers1.jpg'] })
 
 getLabels("api/image/labels").then((response) => {
     if (response.status === 200) {
