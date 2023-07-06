@@ -18,12 +18,12 @@ export default {
 };
 </script>
 <script setup>
-import { defineProps ,defineEmits } from "vue";
+import { defineProps, defineEmits } from "vue";
 const emits = defineEmits(['postSearchRequest']);
 
 const props = defineProps({ plants: Array })
 const look_up_flower = (plantId) => {
-  emits('postSearchRequest',plantId)
+    emits('postSearchRequest', plantId)
 
 };
 </script>

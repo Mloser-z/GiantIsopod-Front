@@ -14,14 +14,14 @@ export default {
 import InfoCard from '@/components/InfoCard.vue';
 
 import { ref } from 'vue';
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { getLabel } from '@/apis';
 
-const route = useRoute();
+const router = useRouter();
 let plant = ref(new Object());
 let load = ref(false)
 
-let msg = route.query.id;
+let msg = router.query.id;
 getLabel("api/image/label", msg).then((response) => {
     if (response.status === 200) {
         plant.value.flower_name = history.state.params.name_zh;
