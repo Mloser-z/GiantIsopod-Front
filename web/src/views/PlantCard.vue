@@ -31,7 +31,7 @@ getLabels("api/image/labels").then((response) => {
 })
 
 const look_up_a_plant = (msg) => {
-    let params = { from:"/plants",name_zh: plants.value[msg].name_zh, name_en: plants.value[msg].name_en }
+    let params = { from: "/plants", name_zh: plants.value[msg].name_zh, name_en: plants.value[msg].name_en }
     router.push({ name: 'plant', query: { id: msg }, state: { params } })
 }
 

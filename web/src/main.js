@@ -16,7 +16,7 @@ const routes = [
     { name: 'home', path: '/', component: HomeVue },
     { name: 'plants', path: '/plants', component: PlantCard },
     { name: 'plant', path: '/plant', component: InfoView },
-    { name: 'predict', path: '/predict', component: PredictView }
+    { name: 'predict', path: '/predict', component: PredictView, meta: { keepAlive: true } }
 ]
 
 
