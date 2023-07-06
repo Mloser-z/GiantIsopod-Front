@@ -1,8 +1,8 @@
 <template >
     <div id="home">
         <Header />
-        <MainPage @postSearchRequest="searchByPic" @postKeyWord="searchByKeyWords" v-if="displayType == 1" />
-        <LoadView v-else></LoadView>
+        <MainPage @postSearchRequest="searchByPic" @postKeyWord="searchByKeyWords" @postOrder="search_in_carousel" :images="plants" v-show="displayType == 1" />
+        <LoadView v-show="displayType == 0"></LoadView>
     </div>
 </template>
 
@@ -22,12 +22,18 @@ import { ref } from "vue";
 
 const router = useRouter();
 const displayType = ref(1)
-
+const plants = ref([
+  {order:1,url:'flowers1.jpg'},
+  {order:2,url:'flowers2.jpg'},
+  {order:3,url:'flowers3.jpg'},
+  {order:4,url:'flowers4.jpg'},
+  {order:5,url:'flowers5.jpg'},
+  {order:6,url:'flowers6.jpg'}])
 // 上传图片，预测返回多个结果
 const searchByPic = (picFile) => {
     router.push({ name: 'predict' })
     // displayType.value = 0;
-    // console.log(picFile);
+    console.log(picFile);
     // postImage('api/image/search', picFile).then((value) => {
     //     if (value.status == 200) {
     //         let params = { message: value.data["message"], possibilty: value.data["possibility"] }
@@ -48,6 +54,12 @@ const searchByKeyWords = (key_words) => {
             router.push({ name: 'plant', state: { params } })
         }
     })
+}
+
+const search_in_carousel = (msg) => {
+  // 根据序号读取轮播图数据数组中的信息并转给详细信息网页
+  let params = { from:"/" }
+  router.push({ name: 'plant', state: { params } })
 }
 </script>
 

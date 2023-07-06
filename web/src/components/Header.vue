@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100vw;height: 12vh;background-color: rgba(3,3,41,0.5);display: block;position: static">
+    <div style="width: 100vw;height: 10vh;background-color: rgba(3,3,41,0.5);display: block;position: static">
         <img src="../assets/logo.png" id="logo">
         <router-link to="/plants">
             <img src="../assets/infoDic_btn.png" width="80px" alt="图片" class="back_btn" v-if="this.$route.path == '/'">
