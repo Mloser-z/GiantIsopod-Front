@@ -1,8 +1,7 @@
 <template>
     <div id="plantsCard">
         <Header />
-        <Cards v-if="load" :plants="plants" @postSearchRequest="look_up_a_plant" />
-        <InfoCard :plant="plant" v-else></InfoCard>
+        <Cards :plants="plants" @postSearchRequest="look_up_a_plant" />
     </div>
 </template>
 
@@ -14,21 +13,17 @@ export default {
 <script setup>
 import Header from "@/components/Header";
 import Cards from "@/components/Cards";
-import InfoCard from "@/components/InfoCard";
-import { getLabels, getLabel } from "@/apis";
+import { getLabels } from "@/apis";
 
 import { ref } from "vue";
-
-let load = ref(true)
+import { useRouter } from 'vue-router'
 let plants = ref()
-let plant = ref(new Object())
-//let plant = ref({ flower_name: '', flower_type: '', flower_intro: '', pics: [] })
 
+
+const router = useRouter()
 getLabels("api/image/labels").then((response) => {
     if (response.status === 200) {
         plants.value = response.data["labels"]
-        load.value = true
-        console.log(plants)
     }
     else {
         console.log("err", response)
@@ -36,20 +31,8 @@ getLabels("api/image/labels").then((response) => {
 })
 
 const look_up_a_plant = (msg) => {
-    // msg为传入的数组id（顺序
-    getLabel("api/image/label", msg).then((response) => {
-        if (response.status === 200) {
-            plant.value.flower_name = plants.value[msg].name_zh;
-            plant.value.flower_type = plants.value[msg].name_en;
-            plant.value.flower_intro = response.data.info;
-            plant.value.pics = response.data.urls;
-            console.log(plant)
-            load.value = false;
-        }
-        else {
-            console.log("err", response)
-        }
-    })
+    let params = { name_zh: plants.value[msg].name_zh, name_en: plants.value[msg].name_en }
+    router.push({ name: 'plant', query: { id: msg }, state: { params } })
 }
 
 
