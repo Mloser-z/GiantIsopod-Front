@@ -1,41 +1,36 @@
 <template>
-    <keep-alive>
-        <div>
-            <div style="height: 10vh;background-color: rgba(3,3,41,0.9);display: block;position: static">
-                <img src="../assets/logo.png" id="logo">
-                <router-link to="/">
-                    <img src="../assets/home_btn.png" id="back_btn">
-                </router-link>
-                <!--  <img src="../assets/back_btn.png" id="back_btn">-->
-            </div>
-            <div id="predictBox">
-                <div id="box_of_origin">
-                    <img src="flowers3.jpg" id="plant_origin_img">
+    <div style="height: 10vh;background-color: rgba(3,3,41,0.9);display: block;position: static">
+        <img src="../assets/logo.png" id="logo">
+        <router-link to="/">
+            <img src="../assets/home_btn.png" id="back_btn">
+        </router-link>
+        <!--  <img src="../assets/back_btn.png" id="back_btn">-->
+    </div>
+
+    <div id="predictBox">
+        <div id="box_of_origin">
+            <img :src="img" id="plant_origin_img">
+        </div>
+        <div id="text">searching results: </div>
+        <hr id="hr" />
+        <div v-for="result in results" :key="result.name_en" id="result_box">
+            <div class="similarity">{{ result.similarity }}</div>
+            <img class="result_pic" :src="result.url0" style="border-left-style: solid;border-left-color: darkgrey" />
+            <img class="result_pic" :src="result.url1" />
+            <div class="info_box">
+                <div class="name">
+                    {{ result.name_en }}
                 </div>
-                <div id="text">searching results：</div>
-                <hr id="hr" />
-                <div v-for="result in results" :key="result.name_en" id="result_box">
-                    <div class="similarity">{{ result.similarity }}</div>
-                    <img class="result_pic" :src="result.url0"
-                        style="border-left-style: solid;border-left-color: darkgrey" />
-                    <img class="result_pic" :src="result.url1" />
-                    <div class="info_box">
-                        <div class="name">
-                            {{ result.name_en }}
-                        </div>
-                        <div class="name">
-                            {{ result.name_zh }}
-                        </div>
-                        <div class="btn_box">
-                            <img class="btn" src="searchBtn.png" title="查看详情" @click="search(result.name_en)">
-                            <img class="btn" src="GoogleBtn.png" title="谷歌搜索">
-                        </div>
-                    </div>
+                <div class="name">
+                    {{ result.name_zh }}
+                </div>
+                <div class="btn_box">
+                    <img class="btn" src="searchBtn.png" title="查看详情" @click="search(result.name_en)">
+                    <img class="btn" src="GoogleBtn.png" title="谷歌搜索">
                 </div>
             </div>
         </div>
-
-    </keep-alive>
+    </div>
 </template>
 
 <script>
@@ -49,13 +44,26 @@ export default {
 
 
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { getLabelFromText } from '@/apis';
 
 const router = useRouter();
+const route = useRoute();
 
-// BUG: 解决数据丢失问题
-const results = ref(history.state.params.possibility)
+let img = ref()
+let results = ref()
+
+if (route.params.from === "/") {
+    img.value = history.state.params.img
+    results.value = history.state.params.possibility
+    sessionStorage.setItem("img", img.value)
+    sessionStorage.setItem("possibility", JSON.stringify(results.value))
+}
+else {
+    console.log(sessionStorage.getItem("img"))
+    img.value = sessionStorage.getItem("img")
+    results.value = JSON.parse(sessionStorage.getItem("possibility"))
+}
 
 const search = (name_en) => {
     getLabelFromText("api/image/search", name_en).then((response) => {
@@ -64,46 +72,8 @@ const search = (name_en) => {
             router.push({ name: 'plant', query: { id: response.data["label"].id }, state: { params } })
         }
     })
+    router.push({ name: 'plant' })
 }
-
-// let plant = ref(new Object());
-// let load = ref(false)
-/* let results = ref([
-    {
-        "similarity": "21%",
-        "url0": "flowers1.jpg",
-        "url1": "flowers1.jpg",
-        "name_en": "Sunflower",
-        "name_zh": "向日葵"
-    },
-    {
-        "similarity": "21%",
-        "url0": "flowers1.jpg",
-        "url1": "flowers1.jpg",
-        "name_en": "Sunflower",
-        "name_zh": "向日葵"
-    },
-    {
-        "similarity": "21%",
-        "url0": "flowers1.jpg",
-        "url1": "flowers1.jpg",
-        "name_en": "Sunflower",
-        "name_zh": "向日葵"
-    }]); */
-// let msg = route.query.id;
-// getLabel("api/image/label", msg).then((response) => {
-//     if (response.status === 200) {
-//         plant.value.flower_name = history.state.params.name_zh;
-//         plant.value.flower_type = history.state.params.name_en;
-//         plant.value.flower_intro = response.data.info;
-//         plant.value.pics = response.data.urls;
-//         console.log(plant);
-//         load.value = true;
-//     }
-//     else {
-//         console.log("err", response);
-//     }
-// })
 
 </script>
 

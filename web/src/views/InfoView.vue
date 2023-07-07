@@ -24,7 +24,7 @@ import { ref } from "vue";
 const route = useRoute();
 let plant = ref(new Object());
 let load = ref(false);
-let from = history.state.params.from
+let from = route.params.from
 // 测试用数据
 const test_data = ref({
     flower_name: "向日葵",
@@ -47,7 +47,7 @@ if (from == '/') {
             plant.value.flower_type = history.state.params.name_en;
             plant.value.flower_intro = response.data.info;
             plant.value.pics = response.data.urls;
-            console.log(plant);
+
             load.value = true;
         }
         else {

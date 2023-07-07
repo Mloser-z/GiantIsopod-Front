@@ -32,16 +32,23 @@ const plants = ref([
     { order: 6, url: 'flowers6.jpg' }])
 // 上传图片，预测返回多个结果
 const searchByPic = (picFile) => {
-    // router.push({ name: 'predict' })
-    // displayType.value = 0;
-    console.log(picFile);
-    postImage('api/image/search', picFile).then((value) => {
-        if (value.status == 200) {
-            let params = { message: value.data["message"], possibility: value.data["possibility"] }
-            router.push({ name: 'predict', state: { params } })
-        }
+    let reader = new FileReader();
+    reader.readAsDataURL(picFile)
+    reader.onloadend = () => {
+        /* let params = { message: "test", possibility: [{ similarity: 0.9, name_zh: "测试", name_en: "test", url0: "flowers1.jpg", url1: "flowers2.jpg" }], img: reader.result };
+        router.push({ name: 'predict', state: { params } }); */
+        postImage('api/image/search', picFile).then((value) => {
+            if (value.status == 200) {
+                let reader = new FileReader()
+                let params = { message: value.data["message"], possibility: value.data["possibility"], img: reader.result }
+                router.push({ name: 'predict', state: { params } })
+            }
 
-    })
+
+        })
+    }
+
+
 }
 //根据关键词搜索唯一结果
 const searchByKeyWords = (key_words) => {
@@ -59,8 +66,7 @@ const searchByKeyWords = (key_words) => {
 
 const search_in_carousel = (msg) => {
     // 根据序号读取轮播图数据数组中的信息并转给详细信息网页
-    let params = { from: "/" }
-    router.push({ name: 'plant', state: { params } })
+    router.push({ name: 'plant' })
 }
 </script>
 

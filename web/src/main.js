@@ -16,13 +16,18 @@ const routes = [
     { name: 'home', path: '/', component: HomeVue },
     { name: 'plants', path: '/plants', component: PlantCard },
     { name: 'plant', path: '/plant', component: InfoView },
-    { name: 'predict', path: '/predict', component: PredictView, meta: { keepAlive: true } }
+    { name: 'predict', path: '/predict', component: PredictView }
 ]
 
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes: routes
+})
+
+router.beforeEach((to, from, next) => {
+    to.params.from = from.path;
+    next();
 })
 
 const app = createApp(App);
