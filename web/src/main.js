@@ -8,7 +8,7 @@ import HomeVue from "@/views/Home";
 import PlantCard from "@/views/PlantCard";
 import InfoView from "@/views/InfoView";
 import PredictView from "@/views/PredictView";
-
+import SearchList from "@/views/SearchList";
 
 
 
@@ -16,7 +16,8 @@ const routes = [
     { name: 'home', path: '/', component: HomeVue },
     { name: 'plants', path: '/plants', component: PlantCard },
     { name: 'plant', path: '/plant', component: InfoView },
-    { name: 'predict', path: '/predict', component: PredictView }
+    { name: 'predict', path: '/predict', component: PredictView },
+    { name: 'key-search',path: '/key-search',component: SearchList}
 ]
 
 

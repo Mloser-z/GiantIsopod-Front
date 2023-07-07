@@ -50,7 +50,7 @@ const key_words = ref('')
 
 //关键词，识别结果
 const search_by_keywords = () => {
-    emits('postKeyWord', key_words)
+    emits('postKeyWord', key_words.value)
 }
 // 传输n图片用于搜索
 const showImg = () => {

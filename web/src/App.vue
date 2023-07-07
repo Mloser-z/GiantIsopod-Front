@@ -9,8 +9,15 @@ export default {
 </script>
 
 <style>
-#app {
+#app ::-webkit-scrollbar {
+/* 隐藏 Chrome、Safari 和 Opera 的滚动条 */
+  display: none;
+}
 
+/* 隐藏 IE、Edge 和 Firefox 的滚动条 */
+#app {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 body {

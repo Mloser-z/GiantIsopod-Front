@@ -37,9 +37,9 @@ const test_data = ref({
 if (from == '/') {
     // 主页轮播图过来
     plant.value = test_data.value;
-
     load.value = true;
-} else {
+} else if (from == '/plants'){
+  // 从植物词典列表过来
     let msg = route.query.id;
     getLabel("api/image/label", msg).then((response) => {
         if (response.status === 200) {
@@ -47,13 +47,17 @@ if (from == '/') {
             plant.value.flower_type = history.state.params.name_en;
             plant.value.flower_intro = response.data.info;
             plant.value.pics = response.data.urls;
-
             load.value = true;
         }
         else {
             console.log("err", response);
         }
     })
+}else {
+  // 从文字检索列表过来
+  console.log(history.state.params.name_en);
+  plant.value = test_data.value;
+  load.value = true;
 }
 
 

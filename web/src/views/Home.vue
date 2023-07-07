@@ -17,7 +17,7 @@ export default {
 import Header from "@/components/Header";
 import MainPage from '@/components/MainPage.vue';
 import LoadView from "@/components/LoadView.vue";
-import { getLabelFromText, postImage } from "@/apis";
+import {getLabelFromText, postImage} from "@/apis";
 import { useRouter } from 'vue-router';
 import { ref } from "vue";
 
@@ -54,12 +54,11 @@ const searchByPic = (picFile) => {
 const searchByKeyWords = (key_words) => {
     // 根据子组件传回植物名字搜索
     displayType.value = 0;
-    console.log(key_words);
     getLabelFromText('api/image/search', key_words).then((value) => {
         if (value.status == 200) {
             // TODO: 文本搜索跳转路由
             let params = { name_zh: value.data }
-            router.push({ name: 'plant', state: { params } })
+            router.push({ name: 'key-search', state: { params } })
         }
     })
 }
