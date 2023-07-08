@@ -31,14 +31,14 @@ export default {
 }
 
 .back_btn {
-    float: right;
-    height: 85%;
-    width: auto;
-    margin: 20px;
-    cursor: pointer;
+  float: right;
+  height: 92%;
+  width: auto;
+  margin: 15px 50px;
+  cursor: pointer;
 }
 
 .back_btn:hover {
-    height: 87%;
+    height: 93%;
 }
 </style>

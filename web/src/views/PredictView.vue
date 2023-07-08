@@ -27,7 +27,7 @@
                 <div class="btn_box">
                     <img class="btn" src="searchBtn.png" title="查看详情"
                         @click="getDetails(result.id, result.name_en, result.name_zh)">
-                    <img class="btn" src="GoogleBtn.png" title="必应搜索" @click="searchMore(result.name_en)">
+                    <img class="btn" src="BingBtn.png" title="必应搜索" @click="searchMore(result.name_en)">
                 </div>
             </div>
         </div>
