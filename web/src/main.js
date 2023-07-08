@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 //import VueRouter from 'vue-router'
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import App from './App.vue'
 import ArcoVue from '@arco-design/web-vue';
 import '@arco-design/web-vue/dist/arco.css';
@@ -17,12 +17,12 @@ const routes = [
     { name: 'plants', path: '/plants', component: PlantCard },
     { name: 'plant', path: '/plant', component: InfoView },
     { name: 'predict', path: '/predict', component: PredictView },
-    { name: 'key-search',path: '/key-search',component: SearchList}
+    { name: 'key-search', path: '/key-search', component: SearchList }
 ]
 
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: routes
 })
 
