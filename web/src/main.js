@@ -23,7 +23,8 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
-    routes: routes
+    routes: routes,
+    base: process.env.BASE_URL
 })
 
 router.beforeEach((to, from, next) => {

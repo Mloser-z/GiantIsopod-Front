@@ -1,1 +1,11 @@
-#TODO: 添加部署信息
+version: '3.7'
+services:
+  web:
+    image: flowers
+    container_name: flowers_web
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    
