@@ -37,13 +37,13 @@ const look_up_flower = (plantId) => {
     background: rgba(211, 237, 213, 0.3);
     overflow-y: scroll;
     width: 100vw;
-    height: 58vh;
+    height: 75vh;
     position: relative;
-    top: 30vh;
+    top: 12vh;
 }
 
 #cards_header {
-    height: 15vh;
+    height: 0vh;
     background: rgba(211, 237, 213, 0.8);
 }
 

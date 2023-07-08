@@ -1,25 +1,26 @@
 <template>
-  <div>
-    <img src="../assets/logoMain.png" id="logo_main">
-    <div id="search_box">
-      <a-input-search style="margin-left: 28vw;float: left;margin-right: 25px;" :style="{ width: '700px' }" size="large"
-                      placeholder="搜索图片" search-button v-on:search="search_by_keywords" v-model="key_words" />
-      <div class="upload-container">
-        <img src="../assets/camera.png" style="float: left;height: 65px;">
-        <label for="pic">上传图片</label>
-        <input type="file" name="pic" id="pic" v-on:input="showImg" accept="image/png, image/jpg" style="display: none">
-      </div>
+    <div>
+        <img src="../assets/logoMain.png" id="logo_main">
+        <div id="search_box">
+            <a-input-search style="margin-left: 28vw;float: left;margin-right: 25px;" :style="{ width: '700px' }"
+                size="large" placeholder="搜索图片" search-button v-on:search="search_by_keywords" v-model="key_words" />
+            <div class="upload-container">
+                <img src="../assets/camera.png" style="float: left;height: 65px;" title="请上传jpg或png格式的图片">
+                <label for="pic" title="请上传jpg或png格式的图片">上传图片</label>
+                <input type="file" name="pic" id="pic" v-on:input="showImg" accept="image/png, image/jpg"
+                    style="display: none">
+            </div>
+        </div>
     </div>
-  </div>
 
-<!--    <div style="margin: 120px auto;text-align: center;">-->
-<!--        <a-carousel :autoPlay="{ interval: 3000, hoverToPause: true }" animation-name="card" show-arrow="always"-->
-<!--            indicator-position="bottom" :style="{ width: '100%', height: '340px', }">-->
-<!--            <a-carousel-item v-for="image in props.images" :key="image.order" :style="{ width: '60%' }">-->
-<!--                <img :src="image.url" :style="{ height: '100%',cursor:'pointer' }" @click="search_in_carousel(image.order)" class="plant" />-->
-<!--            </a-carousel-item>-->
-<!--        </a-carousel>-->
-<!--    </div>-->
+    <!--    <div style="margin: 120px auto;text-align: center;">-->
+    <!--        <a-carousel :autoPlay="{ interval: 3000, hoverToPause: true }" animation-name="card" show-arrow="always"-->
+    <!--            indicator-position="bottom" :style="{ width: '100%', height: '340px', }">-->
+    <!--            <a-carousel-item v-for="image in props.images" :key="image.order" :style="{ width: '60%' }">-->
+    <!--                <img :src="image.url" :style="{ height: '100%',cursor:'pointer' }" @click="search_in_carousel(image.order)" class="plant" />-->
+    <!--            </a-carousel-item>-->
+    <!--        </a-carousel>-->
+    <!--    </div>-->
 </template>
 
 <script>
@@ -39,8 +40,8 @@ export default {
 </script>
 
 <script setup>
-import { ref, defineEmits} from 'vue';
-const emits = defineEmits(['postSearchRequest', 'postKeyWord','postOrder']);
+import { ref, defineEmits } from 'vue';
+const emits = defineEmits(['postSearchRequest', 'postKeyWord', 'postOrder']);
 
 // 轮播图url数组
 // const props = defineProps({images:Array})
@@ -88,15 +89,16 @@ const showImg = () => {
 </script>
 
 <style scoped>
-#logo_main{
-  width: 30vw;
-  height: 20vh;
-  margin: 15vh;
+#logo_main {
+    width: 30vw;
+    height: 20vh;
+    margin: 15vh 15vh 0;
 }
-#search_box{
-  margin-top: -15vh;
-  margin-left: -19vw;
+
+#search_box {
+    margin-left: -19vw;
 }
+
 .upload-container {
     text-align: center;
     float: left;
