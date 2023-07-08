@@ -38,8 +38,8 @@ if (from == '/') {
     // 主页轮播图过来
     plant.value = test_data.value;
     load.value = true;
-} else if (from == '/plants'){
-  // 从植物词典列表过来
+} else {
+    // 从植物词典列表过来
     let msg = route.query.id;
     getLabel("api/image/label", msg).then((response) => {
         if (response.status === 200) {
@@ -53,11 +53,6 @@ if (from == '/') {
             console.log("err", response);
         }
     })
-}else {
-  // 从文字检索列表过来
-  console.log(history.state.params.name_en);
-  plant.value = test_data.value;
-  load.value = true;
 }
 
 

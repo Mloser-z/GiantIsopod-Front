@@ -17,7 +17,7 @@ export default {
 import Header from "@/components/Header";
 import MainPage from '@/components/MainPage.vue';
 import LoadView from "@/components/LoadView.vue";
-import {getLabelFromText, postImage} from "@/apis";
+import { postImage } from "@/apis";
 import { useRouter } from 'vue-router';
 import { ref } from "vue";
 
@@ -39,7 +39,6 @@ const searchByPic = (picFile) => {
         router.push({ name: 'predict', state: { params } }); */
         postImage('api/image/search', picFile).then((value) => {
             if (value.status == 200) {
-                let reader = new FileReader()
                 let params = { message: value.data["message"], possibility: value.data["possibility"], img: reader.result }
                 router.push({ name: 'predict', state: { params } })
             }
@@ -54,13 +53,7 @@ const searchByPic = (picFile) => {
 const searchByKeyWords = (key_words) => {
     // 根据子组件传回植物名字搜索
     displayType.value = 0;
-    getLabelFromText('api/image/search', key_words).then((value) => {
-        if (value.status == 200) {
-            // TODO: 文本搜索跳转路由
-            let params = { name_zh: value.data }
-            router.push({ name: 'key-search', state: { params } })
-        }
-    })
+    router.push({ name: 'key-search', query: { query: key_words } })
 }
 
 const search_in_carousel = (msg) => {

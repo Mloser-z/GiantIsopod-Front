@@ -13,7 +13,8 @@
         <a-carousel :autoPlay="{ interval: 3000, hoverToPause: true }" animation-name="card" show-arrow="always"
             indicator-position="bottom" :style="{ width: '100%', height: '340px', }">
             <a-carousel-item v-for="image in props.images" :key="image.order" :style="{ width: '60%' }">
-                <img :src="image.url" :style="{ height: '100%',cursor:'pointer' }" @click="search_in_carousel(image.order)" class="plant" />
+                <img :src="image.url" :style="{ height: '100%', cursor: 'pointer' }" @click="search_in_carousel(image.order)"
+                    class="plant" />
             </a-carousel-item>
         </a-carousel>
     </div>
@@ -22,25 +23,15 @@
 <script>
 export default {
     name: 'MainPage',
-    // methods: {
-    //     showImg() {
-    //         //获取上传文件的信息
-    //         var upfile = document.getElementById('pic').files[0];
-    //         //生成文件url
-    //         var sr = window.URL.createObjectURL(upfile);
-    //         var goodsimg = document.getElementById('plantImg');
-    //         goodsimg.src = sr;
-    //     },
-    // }
 }
 </script>
 
 <script setup>
-import { ref, defineEmits,defineProps} from 'vue';
-const emits = defineEmits(['postSearchRequest', 'postKeyWord','postOrder']);
+import { ref, defineEmits, defineProps } from 'vue';
+const emits = defineEmits(['postSearchRequest', 'postKeyWord', 'postOrder']);
 
 // 轮播图url数组
-const props = defineProps({images:Array})
+const props = defineProps({ images: Array })
 
 // 存储待搜索关键词的变量
 const key_words = ref('')
@@ -59,7 +50,7 @@ const showImg = () => {
 
 // 查询轮播图中数据结果
 const search_in_carousel = (order) => {
-  emits('postOrder',order)
+    emits('postOrder', order)
 }
 // //根据植物名搜索唯一结果
 // const search = (plantName) => {

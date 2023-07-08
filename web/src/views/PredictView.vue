@@ -11,9 +11,9 @@
         <div id="box_of_origin">
             <img :src="img" id="plant_origin_img">
         </div>
-        <div id="text">searching results: </div>
+        <div id="text">{{ message }}</div>
         <hr id="hr" />
-        <div v-for="result in results" :key="result.name_en" id="result_box">
+        <div v-for="result in results" :key="result.id" id="result_box">
             <div class="similarity">{{ result.similarity }}</div>
             <img class="result_pic" :src="result.url0" style="border-left-style: solid;border-left-color: darkgrey" />
             <img class="result_pic" :src="result.url1" />
@@ -25,8 +25,9 @@
                     {{ result.name_zh }}
                 </div>
                 <div class="btn_box">
-                    <img class="btn" src="searchBtn.png" title="查看详情" @click="search(result.name_en)">
-                    <img class="btn" src="GoogleBtn.png" title="谷歌搜索">
+                    <img class="btn" src="searchBtn.png" title="查看详情"
+                        @click="getDetails(result.id, result.name_en, result.name_zh)">
+                    <img class="btn" src="GoogleBtn.png" title="必应搜索" @click="searchMore(result.name_en)">
                 </div>
             </div>
         </div>
@@ -45,34 +46,37 @@ export default {
 
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router'
-import { getLabelFromText } from '@/apis';
 
 const router = useRouter();
 const route = useRoute();
 
 let img = ref()
+let message = ref()
 let results = ref()
 
 if (route.params.from === "/") {
     img.value = history.state.params.img
+    message.value = history.state.params.message
     results.value = history.state.params.possibility
     sessionStorage.setItem("img", img.value)
+    sessionStorage.setItem("message", message.value)
     sessionStorage.setItem("possibility", JSON.stringify(results.value))
 }
 else {
-    console.log(sessionStorage.getItem("img"))
     img.value = sessionStorage.getItem("img")
+    message.value = sessionStorage.getItem("message")
     results.value = JSON.parse(sessionStorage.getItem("possibility"))
 }
 
-const search = (name_en) => {
-    getLabelFromText("api/image/search", name_en).then((response) => {
-        if (response.status === 200 && response.data["status"] === "success") {
-            let params = { from: "/predict", name_zh: response.data["label"].name_zh, name_en: response.data["label"].name_en }
-            router.push({ name: 'plant', query: { id: response.data["label"].id }, state: { params } })
-        }
-    })
-    router.push({ name: 'plant' })
+
+const getDetails = (id, name_en, name_zh) => {
+    let params = { name_en: name_en, name_zh: name_zh }
+    router.push({ name: 'plant', query: { id: id }, state: { params } })
+}
+
+const searchMore = (query) => {
+    let url = "https://www.bing.com/search?q=" + query
+    window.open(url)
 }
 
 </script>
