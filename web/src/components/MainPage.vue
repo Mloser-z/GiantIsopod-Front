@@ -7,40 +7,22 @@
             <div class="upload-container">
                 <img src="../assets/camera.png" style="float: left;height: 65px;" title="请上传jpg或png格式的图片">
                 <label for="pic" title="请上传jpg或png格式的图片">上传图片</label>
-                <input type="file" name="pic" id="pic" v-on:input="showImg" accept="image/png, image/jpg"
+                <input ref="imgInput" type="file" name="pic" id="pic" v-on:input="showImg" accept="image/png, image/jpg"
                     style="display: none">
             </div>
         </div>
     </div>
-
-    <!--    <div style="margin: 120px auto;text-align: center;">-->
-    <!--        <a-carousel :autoPlay="{ interval: 3000, hoverToPause: true }" animation-name="card" show-arrow="always"-->
-    <!--            indicator-position="bottom" :style="{ width: '100%', height: '340px', }">-->
-    <!--            <a-carousel-item v-for="image in props.images" :key="image.order" :style="{ width: '60%' }">-->
-    <!--                <img :src="image.url" :style="{ height: '100%',cursor:'pointer' }" @click="search_in_carousel(image.order)" class="plant" />-->
-    <!--            </a-carousel-item>-->
-    <!--        </a-carousel>-->
-    <!--    </div>-->
 </template>
 
 <script>
 export default {
     name: 'MainPage',
-    // methods: {
-    //     showImg() {
-    //         //获取上传文件的信息
-    //         var upfile = document.getElementById('pic').files[0];
-    //         //生成文件url
-    //         var sr = window.URL.createObjectURL(upfile);
-    //         var goodsimg = document.getElementById('plantImg');
-    //         goodsimg.src = sr;
-    //     },
-    // }
 }
 </script>
 
 <script setup>
 import { ref, defineEmits } from 'vue';
+import { Notification } from '@arco-design/web-vue';
 const emits = defineEmits(['postSearchRequest', 'postKeyWord', 'postOrder']);
 
 // 轮播图url数组
@@ -51,41 +33,40 @@ const key_words = ref('')
 // 存储搜索结果
 // const plant_result = ref({ flower_name: '大王花对对对', flower_type: '霸王拿书', flower_intro: '1111', pics: ['flowers1.jpg', 'flowers1.jpg', 'flowers1.jpg'] })
 
+const imgInput = ref()
 
 //关键词，识别结果
 const search_by_keywords = () => {
-    emits('postKeyWord', key_words.value)
+    console.log(key_words.value)
+    let regu = "^[ ]+$";
+    let re = new RegExp(regu);
+
+    if (key_words.value != '' && !re.test(key_words.value)) {
+        emits('postKeyWord', key_words.value)
+    } else {
+        handleNotification();
+    }
+
 }
 // 传输n图片用于搜索
 const showImg = () => {
-    emits('postSearchRequest', document.getElementById('pic').files[0])
+    let file = imgInput.value.files[0];
+    if (file != undefined) {
+        emits('postSearchRequest', file);
+    }
+    imgInput.value.value = null;
+
 };
 
-// 查询轮播图中数据结果
-// const search_in_carousel = (order) => {
-//   emits('postOrder',order)
-// }
-// //根据植物名搜索唯一结果
-// const search = (plantName) => {
-//     // 根据子组件传回植物名字搜索
-//     displayType.value = 0;
-//     console.log(plantName);
-//     getLabelFromText('api/image/search', plantName).then((value) => {
-//         console.log(value);
-//         if (key_words.value == '') {
-//             displayType.value = 1;
-//         } else {
-//             displayType.value = 3;
-//         }
-//     })
-// }
-// //主页轮播图，搜索结果
-// const search_from_imgCard = (imgUrl) => {
-//     postImage('api/image/search', new File([imgUrl], 'plant')).then((value) => {
-//         console.log(value)
-//     })
-//     displayType.value = 2;
-// }
+const handleNotification = () => {
+    Notification.warning({
+        title: '错误提示',
+        content: '请输入非空内容',
+        closable: true,
+        duration: 4000,
+        style: { width: '500px' }
+    })
+}
 </script>
 
 <style scoped>

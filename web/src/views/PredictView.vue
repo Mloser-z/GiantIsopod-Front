@@ -111,7 +111,7 @@ const searchMore = (query) => {
     width: 18vw;
     aspect-ratio: 1;
     object-fit: cover;
-    margin-top: 130px;
+    margin-top: 5vh;
     border-style: solid;
     border-color: darkgrey;
     padding: 10px

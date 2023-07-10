@@ -52,8 +52,6 @@ const searchByPic = (picFile) => {
     let reader = new FileReader();
     reader.readAsDataURL(picFile)
     reader.onloadend = () => {
-        /* let params = { message: "test", possibility: [{ similarity: 0.9, name_zh: "测试", name_en: "test", url0: "flowers1.jpg", url1: "flowers2.jpg" }], img: reader.result };
-        router.push({ name: 'predict', state: { params } }); */
         displayType.value = 0;
         postImage('api/image/search', picFile).then((value) => {
             if (value.status == 200) {
@@ -65,8 +63,6 @@ const searchByPic = (picFile) => {
             }
         })
     }
-
-
 }
 //根据关键词搜索唯一结果
 const searchByKeyWords = (key_words) => {
