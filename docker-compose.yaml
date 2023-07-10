@@ -1,8 +1,7 @@
 version: '3.7'
 services:
   web:
-    image: gianisopod_front
-    container_name: gianisopod_front_web
+    image: mloser/giantisopod_front:v1.0.1
     build: 
       context: .
       dockerfile: Dockerfile
